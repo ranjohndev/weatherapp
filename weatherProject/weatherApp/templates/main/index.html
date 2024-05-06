@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/cerulean/bootstrap.min.css" integrity="sha512-vaImhtQoaCXvevCM/UK+8ND/df0kiQWLtR65wgq0AWShEXLpWHMve0oGgU0q1gq1MbbyEuAhMMlqNmZd7s7wTQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title> Your Weather by Python </title>
+</head>
+
+
+
+<body style="background-image: url('{% static 'images/savannahbck.jpg' %}'); background-size: cover;">
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container">
+      <a href="../" class="navbar-brand">Your Daily Weather App <span style="color: rgb(39, 117, 161);"> <strong> - Home
+            </strong>
+        </span> </a>
+      <a href="https://openweathermap.org" class="navbar-tech">created by R. John Dunn Python Developer</a>
+    </div>
+  </div>
+
+
+  <br /><br /> <br>
+  <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:0px;">
+    <div class="container" style="max-width: 750px; background-color: white; padding: 10px;">
+      <h1 class="display-5" style="color: black;">Your Daily Weather</h1> 
+      <h5 style="color: black;"> Check Road Conditions, Travel Plans and More! </h5>
+    </div>
+    <img src="{% static 'images/weather.jpg' %}" class="image" style="width:750px; margin-bottom:0px;">
+  </div>
+  
+
+
+  <div style="text-align: center;">
+    <div class="container" style="max-width: 750px; background-color: white; padding: 10px;">
+      <!-- Your content here -->
+    </div>
+  </div>
+  
+  
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary centered-navbar" style="width: 50%; margin: 0 auto; border-radius: 5px;">
+    <form method="post" class="col-md"">
+      {% csrf_token %}
+      <div class=" input-group ">
+
+      <input type="text" class="form-control" name="city" placeholder="Check Current Conditions of your City or Town (Type letters only) ...">
+      <div class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+      </div>
+      <form>
+  </nav>
+  <br> <br>
+  <div class="row">
+    {% if country_code and coordinate and temp and pressure and humidity %}
+    <div class="col d-flex justify-content-center" ">
+      <div class=" card text-white bg-light mb-6">
+      <div class=" card-body">
+        <h4 class="display-5">Your Weather {{ city }}</h4>
+        <h4><span style="color: rgb(39, 117, 161);" class="badge badge-primary">Country Code :</span> {{country_code}}</h4>
+        <h4><span style="color: rgb(39, 117, 161);" class="badge badge-primary">Coordinates [X,Y] :</span> {{coordinate}}</h4>
+        <h4><span style="color: rgb(39, 117, 161);" class="badge badge-primary">Temperature in Farenheit :</span> {{temp}}</h4>
+        <h4><span style="color: rgb(39, 117, 161);" class="badge badge-primary">Pressure :</span> {{pressure}} </h4>
+        <h4><span style="color: rgb(39, 117, 161);" class="badge badge-primary">Humidity : </span> {{humidity}}</h4>
+        <h4><span style="color: rgb(39, 117, 161);" class="badge badge-primary">Forecast : </span> {{main}} <img
+            src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
+        <h4><span style="color: rgb(39, 117, 161);" class="badge badge-primary">Description : </span> {{description}}</h4>
+      </div>
+      {% endif %}
+    </div>
+</body>
+</html>
